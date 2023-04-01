@@ -8,6 +8,7 @@
  * Which is which?
  */
 
+//descriminated union
 type A =
   | {
       type: "a";
@@ -21,13 +22,14 @@ type A =
       type: "c";
       c: string;
     };
-
+// union
 type B = "a" | "b" | "c";
-
+// enum
 enum C {
   A = "a",
   B = "b",
   C = "c",
 }
+
 
 export {};

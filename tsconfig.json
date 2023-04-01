@@ -98,5 +98,5 @@
   },
   "include": [
     "src"
-  ]
+, "extendKeyof.ts"  ]
 }
