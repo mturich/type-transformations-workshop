@@ -1,7 +1,8 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-type GetParametersAndReturnType<T> = {
+type GetParametersAndReturnType<T extends (...arg: any) => any> = {
   params: Parameters<T>;
+  // ^?
   returnValue: ReturnType<T>;
 };
 
@@ -9,6 +10,7 @@ type tests = [
   Expect<
     Equal<
       GetParametersAndReturnType<() => string>,
+    //                            
       { params: []; returnValue: string }
     >
   >,

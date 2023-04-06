@@ -1,6 +1,6 @@
 import { Equal, Expect } from "../helpers/type-utils";
 
-const getServerSideProps = async () => {
+const getServerSideProps = async ()=> {
   const data = await fetch("https://jsonplaceholder.typicode.com/todos/1");
   const json: { title: string } = await data.json();
   return {
@@ -9,9 +9,15 @@ const getServerSideProps = async () => {
     },
   };
 };
-
-type InferPropsFromServerSideFunction = unknown;
-
+type T =  typeof getServerSideProps
+  
+type InferPropsFromServerSideFunction<T> = T extends () => Promise<{
+  props: infer K
+}>
+  ? K
+  : never;
+type t = InferPropsFromServerSideFunction<typeof getServerSideProps>
+//   ^?
 type tests = [
   Expect<
     Equal<

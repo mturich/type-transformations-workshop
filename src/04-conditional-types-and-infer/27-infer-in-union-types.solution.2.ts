@@ -10,14 +10,7 @@ const parser3 = {
   extract: () => true,
 };
 
-type GetParserResult<T> = T extends
-  | {
-      parse: () => infer TResult;
-    }
-  | {
-      extract: () => infer TResult;
-    }
-  | (() => infer TResult)
+type GetParserResult<T> = T extends { parse: () => infer TResult; } | {      extract: () => infer TResult;} | (() => infer TResult)
   ? TResult
   : never;
 

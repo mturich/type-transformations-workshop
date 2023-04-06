@@ -10,7 +10,16 @@ const parser3 = {
   extract: () => true,
 };
 
-type GetParserResult<T> = unknown;
+
+
+// type Fn = (...args: any) => string | boolean | number 
+type Fn = (...args: any) => any 
+type UnionFn = Fn| { [key: string]: Fn }
+type GetParserResult<T extends UnionFn> = T extends (() => infer K) | { [key: string]: () => infer K }
+  ? K
+  : never;
+;
+type T = GetParserResult<typeof parser1>
 
 type tests = [
   Expect<Equal<GetParserResult<typeof parser1>, number>>,
